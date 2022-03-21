@@ -2,6 +2,8 @@ FROM ubuntu:20.04 AS base
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG CONFIG_DIR=./config
+ARG USERNAME=rv
+ARG USERHASH=$1$rv$sPaQWGxF5oB7q./00FQcn0
 
 RUN apt update
 
@@ -129,13 +131,13 @@ RUN chmod 600 rootfs/var/spool/cron/crontabs/root
 FROM config AS add-user
 
 WORKDIR /build
-RUN useradd -R /build/rootfs -s /bin/bash rv
-RUN mkdir -p rootfs/home/rv
-RUN chown 1000:1000 rootfs/home/rv
-RUN sed -i '/rv:!:.../c\rv:$(openssl passwd -1 -salt rv licheerv):...' rootfs/etc/shadow
-RUN cp rootfs/etc/skel/.bash* rootfs/home/rv/
-RUN cp rootfs/etc/skel/.profile rootfs/home/rv/
-RUN echo "sudo:x:27:rv" >> rootfs/etc/group
+RUN useradd -R /build/rootfs -s /bin/bash USERNAME
+RUN mkdir -p rootfs/home/$USERNAME
+RUN chown 1000:1000 rootfs/home/$USERNAME
+RUN sed -i '/$USERNAME:!:.../c\$USERNAME:$USERHASH:...' rootfs/etc/shadow
+RUN cp rootfs/etc/skel/.bash* rootfs/home/$USERNAME/
+RUN cp rootfs/etc/skel/.profile rootfs/home/$USERNAME/
+RUN echo "sudo:x:27:$USERNAME" >> rootfs/etc/group
 
 FROM add-user AS boot-script
 
