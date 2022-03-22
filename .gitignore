@@ -1,3 +1,7 @@
 output/*
 *.swp
 *.swo
+config/interfaces
+config/wpa_supplicant.conf
+config/buildcfg
+

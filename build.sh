@@ -1,3 +1,4 @@
 #!/bin/bash
 
-docker build -t licheerv . USERNAME=$USERNAME USERHASH=$USERHASH
+source ./config/buildcfg
+docker build -t licheerv --build-arg CFGUSERNAME=$CFGUSERNAME --build-arg CFGUSERHASH=$CFGUSERHASH .

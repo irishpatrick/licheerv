@@ -2,8 +2,8 @@ FROM ubuntu:20.04 AS base
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG CONFIG_DIR=./config
-ARG USERNAME=rv
-ARG USERHASH=$1$rv$sPaQWGxF5oB7q./00FQcn0
+ARG CFGUSERNAME=rv
+ARG CFGUSERHASH=$1$rv$sPaQWGxF5oB7q./00FQcn0
 
 RUN apt update
 
