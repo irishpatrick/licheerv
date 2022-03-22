@@ -1,8 +1,0 @@
-source /etc/network/interfaces.d/*
-
-allow-hotplug wlan0
-iface wlan0 inet dhcp
-	wpa-ssid General Kenobi
-	wpa-psk Myon1yhope!
-	#wpa-psk c347c470c10b9a64068078417c01736c39ac636c14cbf0b90a231635d7f299d0
-
